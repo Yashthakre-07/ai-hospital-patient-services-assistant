@@ -141,7 +141,11 @@ def search(query: str, user_ctx: Dict[str, str]) -> Dict[str, Any]:
     }
 
 def ingest(file_path: str, user_ctx: Dict[str, str]) -> Dict[str, Any]:
-    """Requirement R11: Live admin-only ingestion without server restart."""
+    """Requirement R11 & R8: Live admin-only ingestion without server restart.
+    
+    Supports .md, .txt, and .pdf documents.
+    Treats all incoming document text strictly as DATA ONLY (neutralizing prompt injection).
+    """
     caller_role = user_ctx.get("role", "patient")
     if caller_role != "admin":
         return {
@@ -156,11 +160,25 @@ def ingest(file_path: str, user_ctx: Dict[str, str]) -> Dict[str, Any]:
         }
 
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()
+        from .chunker import extract_text_from_file
+        content = extract_text_from_file(file_path)
 
         fname = os.path.basename(file_path)
         new_chunks = chunk_document(content, fname)
+        
+        if not new_chunks:
+            # Fallback for plain files without ## markdown sections
+            neutralized = sanitize_and_neutralize_data(content[:2000])
+            new_chunks = [{
+                "source": fname,
+                "section": "General Content",
+                "authority": "hospital_policy",
+                "authority_rank": 1,
+                "version": "1.0",
+                "effective_date": "2026-10-30",
+                "text": f"[{fname} - General Content]\n{neutralized}",
+                "raw_text": f"{fname} General Content {neutralized}"
+            }]
         
         # Live append to running index (no restart needed!)
         global _INDEXED_CHUNKS

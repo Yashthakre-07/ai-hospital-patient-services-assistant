@@ -4,13 +4,36 @@ Breaks Markdown hospital documents into structured, metadata-enriched chunks.
 Treats uploaded text as DATA ONLY (neutralizing prompt injection).
 """
 import re
+import os
 from typing import List, Dict, Any
+
+try:
+    import pypdf
+except ImportError:
+    pypdf = None
 
 AUTHORITY_RANKS = {
     "regulatory_authority": 3,
     "clinical_guideline": 2,
     "hospital_policy": 1
 }
+
+def extract_text_from_file(file_path: str) -> str:
+    """Extracts text content from Markdown, Plain Text, or PDF files."""
+    ext = os.path.splitext(file_path)[1].lower()
+    if ext == ".pdf":
+        if not pypdf:
+            raise RuntimeError("pypdf is required to extract text from PDF files.")
+        reader = pypdf.PdfReader(file_path)
+        extracted = []
+        for i, page in enumerate(reader.pages):
+            txt = page.extract_text() or ""
+            if txt.strip():
+                extracted.append(f"## Section Page {i+1}\n{txt.strip()}")
+        return "\n\n".join(extracted)
+    else:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+            return f.read()
 
 def parse_metadata(content: str) -> Dict[str, str]:
     """Extracts metadata header block from document text."""

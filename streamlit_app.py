@@ -84,14 +84,33 @@ with st.sidebar:
 
     st.divider()
 
-    # 3. Admin Live Ingestion (R11)
+    # 3. Admin Live Ingestion (R11 & External Documents: MD, TXT, PDF)
     if role == "admin":
-        st.subheader("📄 Admin Live Ingestion (R11)")
-        ingest_file = st.text_input("Document Path on Server", value="data/docs/emergency_procedure.md")
-        if st.button("Live Ingest Protocol", use_container_width=True):
+        st.subheader("📄 Admin Document Ingestion (R11)")
+        st.caption("Upload or reference external .md, .txt, or .pdf files")
+        
+        uploaded_file = st.file_uploader("Upload External Policy/Protocol (PDF, MD, TXT)", type=["pdf", "md", "txt"])
+        if uploaded_file is not None:
+            if st.button("Ingest Uploaded File", use_container_width=True):
+                save_dir = "data/docs"
+                import os
+                os.makedirs(save_dir, exist_ok=True)
+                save_path = os.path.join(save_dir, uploaded_file.name)
+                with open(save_path, "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+                
+                result = retrieval.ingest(save_path, user_ctx)
+                if result.get("status") == "success":
+                    st.success(f"✓ Ingested {result.get('file')} ({result.get('chunks')} chunks) live!")
+                else:
+                    st.error(result.get("error", "Ingestion failed"))
+        
+        st.markdown("**Or specify server path:**")
+        ingest_file = st.text_input("Document Path on Server", value="Hospital_AI_Assistant_Use_Case.pdf")
+        if st.button("Live Ingest from Path", use_container_width=True):
             result = retrieval.ingest(ingest_file, user_ctx)
             if result.get("status") == "success":
-                st.success(f"Ingested {result.get('file')} ({result.get('chunks')} chunks) live!")
+                st.success(f"✓ Ingested {result.get('file')} ({result.get('chunks')} chunks) live!")
             else:
                 st.error(result.get("error", "Ingestion failed"))
 
