@@ -201,3 +201,4 @@ def test_audit_logging_and_retrieval():
     assert entries[0]["trace_id"] == trace_id
     assert entries[0]["event"]["privacy_check"] == "passed"
     assert entries[0]["event"]["latency_ms"] == 14.2
+

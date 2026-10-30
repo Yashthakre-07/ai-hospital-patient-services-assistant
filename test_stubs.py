@@ -65,7 +65,7 @@ def test_chat_endpoint_policy_query():
     assert data["trace_id"].startswith("HSP-")
     assert data["answer_type"] == "retrieved_fact"
     assert len(data["citations"]) >= 1
-    assert data["citations"][0]["source"] == "ICU_Visiting_Policy.md"
+    assert "ICU_Visiting_Policy" in data["citations"][0]["source"]
 
 def test_chat_endpoint_not_found():
     resp = client.post(

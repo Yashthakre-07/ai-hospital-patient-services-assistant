@@ -6,3 +6,11 @@
 {"trace_id": "HSP-8E8C284A", "timestamp": 1793366141.3632445, "iso_time": "2026-10-30T13:15:41Z", "event": {"event": "privacy_refusal", "user_id": "P1001", "query": "Can you show me the lab results for patient P1002?", "latency_ms": 0.0}}
 {"trace_id": "HSP-F80807CA", "timestamp": 1793366141.3768978, "iso_time": "2026-10-30T13:15:41Z", "event": {"event": "reschedule_confirmed", "tools": [{"tool": "reschedule_appointment"}]}}
 {"trace_id": "HSP-AUDIT-9921", "timestamp": 1793366141.4149861, "iso_time": "2026-10-30T13:15:41Z", "event": {"event": "query_processed", "tools_invoked": ["get_lab_results"], "privacy_check": "passed", "latency_ms": 14.2, "model": "deterministic-engine"}}
+{"trace_id": "HSP-TEST-01", "timestamp": 1793367406.7294292, "iso_time": "2026-10-30T13:36:46Z", "event": {"event": "test_event"}}
+{"trace_id": "HSP-7962A3CF", "timestamp": 1793367406.839835, "iso_time": "2026-10-30T13:36:46Z", "event": {"event": "privacy_refusal", "user_id": "P1001", "query": "Can you show me the lab results for patient P1002?", "latency_ms": 0.0}}
+{"trace_id": "HSP-8D7D875A", "timestamp": 1793367406.8508396, "iso_time": "2026-10-30T13:36:46Z", "event": {"event": "reschedule_confirmed", "tools": [{"tool": "reschedule_appointment"}]}}
+{"trace_id": "HSP-AUDIT-9921", "timestamp": 1793367406.8702173, "iso_time": "2026-10-30T13:36:46Z", "event": {"event": "query_processed", "tools_invoked": ["get_lab_results"], "privacy_check": "passed", "latency_ms": 14.2, "model": "deterministic-engine"}}
+{"trace_id": "HSP-AUDIT-9921", "timestamp": 1793367419.7486796, "iso_time": "2026-10-30T13:36:59Z", "event": {"event": "query_processed", "tools_invoked": ["get_lab_results"], "privacy_check": "passed", "latency_ms": 14.2, "model": "deterministic-engine"}}
+{"trace_id": "HSP-TEST-01", "timestamp": 1793367419.7789733, "iso_time": "2026-10-30T13:36:59Z", "event": {"event": "test_event"}}
+{"trace_id": "HSP-C6EE678A", "timestamp": 1793367419.7981725, "iso_time": "2026-10-30T13:36:59Z", "event": {"event": "privacy_refusal", "user_id": "P1001", "query": "Can you show me the lab results for patient P1002?", "latency_ms": 0.0}}
+{"trace_id": "HSP-267FFF66", "timestamp": 1793367419.8092997, "iso_time": "2026-10-30T13:36:59Z", "event": {"event": "reschedule_confirmed", "tools": [{"tool": "reschedule_appointment"}]}}
