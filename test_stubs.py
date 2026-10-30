@@ -99,13 +99,16 @@ def test_chat_endpoint_reschedule_flow():
     assert resp1.status_code == 200
     data1 = resp1.json()
     assert data1["answer_type"] == "clarification_needed"
-    assert "CONFIRM-APT-101-9912" in data1["answer"]
+    assert "CONFIRM-APT-101-" in data1["answer"]
+    
+    # Extract generated dynamic token
+    token = data1["answer"].split("token: ")[-1].strip()
     
     # Step 2: Confirm
     resp2 = client.post(
         "/chat",
         headers={"X-User-Id": "P1001", "X-User-Role": "patient"},
-        json={"message": "Confirm reschedule", "confirm_token": "CONFIRM-APT-101-9912"}
+        json={"message": "Confirm reschedule", "confirm_token": token}
     )
     assert resp2.status_code == 200
     data2 = resp2.json()
@@ -123,3 +126,4 @@ def test_chat_endpoint_surgery_readiness():
     assert data["answer_type"] == "calculated"
     assert len(data["tools_invoked"]) == 4
     assert "not medical authorization" in data["answer"]
+

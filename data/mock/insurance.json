@@ -1,0 +1,83 @@
+{
+  "policies": [
+    {
+      "patient_id": "P1001",
+      "payer_name": "Blue Cross Blue Shield Health Plus",
+      "policy_number": "BCBS-9827364-01",
+      "status": "ACTIVE",
+      "effective_start": "2026-01-01",
+      "effective_end": "2026-12-31",
+      "coverage": {
+        "Total Knee Replacement": {
+          "covered": true,
+          "co_pay": "$250.00",
+          "coinsurance": "10%",
+          "network_status": "In-Network",
+          "pre_authorization_required": true,
+          "pre_authorization_status": "APPROVED",
+          "pre_auth_number": "AUTH-88219-KNEE"
+        },
+        "MRI Scan": {
+          "covered": true,
+          "co_pay": "$75.00",
+          "coinsurance": "0%",
+          "network_status": "In-Network",
+          "pre_authorization_required": true,
+          "pre_authorization_status": "APPROVED",
+          "pre_auth_number": "AUTH-77312-MRI"
+        },
+        "Cardiology Consultation": {
+          "covered": true,
+          "co_pay": "$30.00",
+          "coinsurance": "0%",
+          "network_status": "In-Network",
+          "pre_authorization_required": false
+        }
+      }
+    },
+    {
+      "patient_id": "P1002",
+      "payer_name": "United Healthcare Gold",
+      "policy_number": "UHC-5544332-02",
+      "status": "ACTIVE",
+      "effective_start": "2026-01-01",
+      "effective_end": "2026-12-31",
+      "coverage": {
+        "Cardiology Consultation": {
+          "covered": true,
+          "co_pay": "$40.00",
+          "coinsurance": "0%",
+          "network_status": "In-Network",
+          "pre_authorization_required": false
+        }
+      }
+    },
+    {
+      "patient_id": "P1003",
+      "payer_name": "Aetna Bronze Basic",
+      "policy_number": "AET-1122334-03",
+      "status": "ACTIVE",
+      "effective_start": "2026-01-01",
+      "effective_end": "2026-12-31",
+      "coverage": {
+        "Total Knee Replacement": {
+          "covered": false,
+          "co_pay": "N/A",
+          "coinsurance": "N/A",
+          "network_status": "Excluded Benefit",
+          "reason": "Elective orthopedic joint replacement excluded on Bronze Basic tier without supplemental rider.",
+          "pre_authorization_required": false
+        }
+      }
+    },
+    {
+      "patient_id": "P1004",
+      "payer_name": "Cigna Standard",
+      "policy_number": "CIG-9988776-00",
+      "status": "EXPIRED",
+      "effective_start": "2025-01-01",
+      "effective_end": "2025-12-31",
+      "coverage": {}
+    }
+  ]
+}

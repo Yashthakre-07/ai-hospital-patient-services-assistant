@@ -1,0 +1,44 @@
+{
+  "appointments": [
+    {
+      "appointment_id": "APT-101",
+      "patient_id": "P1001",
+      "department": "Cardiology",
+      "doctor": "Dr. Sarah Jenkins",
+      "datetime": "2026-11-12 11:00 AM",
+      "location": "Building A, Floor 3, Suite 302",
+      "status": "RESCHEDULED",
+      "type": "In-Person Consultation"
+    },
+    {
+      "appointment_id": "APT-102",
+      "patient_id": "P1001",
+      "department": "Radiology (MRI)",
+      "doctor": "Dr. David Chen",
+      "datetime": "2026-11-08 02:30 PM",
+      "location": "Diagnostic Pavilion, Room R-12",
+      "status": "CONFIRMED",
+      "type": "Diagnostic Imaging"
+    },
+    {
+      "appointment_id": "APT-201",
+      "patient_id": "P1002",
+      "department": "Cardiology",
+      "doctor": "Dr. Sarah Jenkins",
+      "datetime": "2026-11-06 09:00 AM",
+      "location": "Building A, Floor 3, Suite 302",
+      "status": "CONFIRMED",
+      "type": "Follow-up"
+    },
+    {
+      "appointment_id": "APT-301",
+      "patient_id": "P1003",
+      "department": "Orthopedics",
+      "doctor": "Dr. Robert Vance",
+      "datetime": "2026-11-10 11:30 AM",
+      "location": "Surgical Center, Suite 104",
+      "status": "CONFIRMED",
+      "type": "Pre-Op Evaluation"
+    }
+  ]
+}

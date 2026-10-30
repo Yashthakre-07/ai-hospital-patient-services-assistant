@@ -1,0 +1,72 @@
+{
+  "preop_records": {
+    "P1001": {
+      "procedure": "Total Knee Replacement",
+      "required_tests": [
+        "Complete Blood Count (CBC)",
+        "Comprehensive Metabolic Panel (CMP)",
+        "Chest X-Ray",
+        "ECG / Cardiac Clearance"
+      ],
+      "completed_tests": [
+        {"test": "Complete Blood Count (CBC)", "completed_date": "2026-10-25", "status": "COMPLETED", "result_summary": "Within normal limits"},
+        {"test": "Comprehensive Metabolic Panel (CMP)", "completed_date": "2026-10-25", "status": "COMPLETED", "result_summary": "Normal kidney/liver panel"},
+        {"test": "Chest X-Ray", "completed_date": "2026-10-26", "status": "COMPLETED", "result_summary": "Clear, no active infiltrates"}
+      ],
+      "pending_tests": [
+        {"test": "ECG / Cardiac Clearance", "status": "PENDING", "action_required": "Schedule with Cardiology prior to surgical admission"}
+      ]
+    },
+    "P1003": {
+      "procedure": "Total Knee Replacement",
+      "required_tests": [
+        "Complete Blood Count (CBC)",
+        "Chest X-Ray",
+        "ECG / Cardiac Clearance"
+      ],
+      "completed_tests": [],
+      "pending_tests": [
+        {"test": "Complete Blood Count (CBC)", "status": "PENDING", "action_required": "Blood draw needed"},
+        {"test": "Chest X-Ray", "status": "PENDING", "action_required": "Radiology order placed"},
+        {"test": "ECG / Cardiac Clearance", "status": "PENDING", "action_required": "Cardiology appointment needed"}
+      ]
+    }
+  },
+  "surgeon_schedules": {
+    "Dr. Robert Vance": {
+      "specialty": "Orthopedic Surgery",
+      "department": "Orthopedics",
+      "available_slots": [
+        "2026-11-12 08:00 AM",
+        "2026-11-14 01:00 PM",
+        "2026-11-19 09:00 AM"
+      ]
+    },
+    "Dr. Sarah Jenkins": {
+      "specialty": "Cardiology",
+      "department": "Cardiology",
+      "available_slots": [
+        "2026-11-11 10:00 AM",
+        "2026-11-12 11:00 AM",
+        "2026-11-13 02:00 PM"
+      ]
+    }
+  },
+  "drug_interactions": [
+    {
+      "drugs": ["Warfarin", "Aspirin"],
+      "severity": "HIGH",
+      "warning": "Increased risk of severe bleeding. Co-administration generally contraindicated unless strictly monitored."
+    },
+    {
+      "drugs": ["Lisinopril", "Potassium Chloride"],
+      "severity": "MODERATE",
+      "warning": "Risk of hyperkalemia. Serum potassium levels should be closely monitored."
+    },
+    {
+      "drugs": ["Metformin", "Iodinated Contrast"],
+      "severity": "MODERATE",
+      "warning": "Risk of lactic acidosis. Metformin should be held 48 hours prior to contrast imaging."
+    }
+  ]
+}

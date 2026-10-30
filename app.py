@@ -21,6 +21,7 @@ app = FastAPI(
     description="Grounded, secure, auditable hospital assistant."
 )
 
+
 class ChatRequest(BaseModel):
     message: str = Field(..., description="The user query or prompt")
     confirm_token: Optional[str] = Field(None, description="Confirmation token for actions")
@@ -78,3 +79,4 @@ def get_audit_trail(trace_id: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
+

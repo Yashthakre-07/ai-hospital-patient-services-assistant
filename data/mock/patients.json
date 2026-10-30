@@ -1,0 +1,56 @@
+{
+  "patients": [
+    {
+      "patient_id": "P1001",
+      "name": "Jane Doe",
+      "dob": "1980-05-14",
+      "phone": "+1-555-0199",
+      "ssn_masked": "***-**-4321",
+      "email": "j***e@example.com",
+      "emergency_contact": "John Doe (Spouse) - 555-0198",
+      "conditions": ["Osteoarthritis of right knee", "Type 2 Diabetes Mellitus", "Hypertension"],
+      "scheduled_surgery": {
+        "procedure": "Total Knee Replacement",
+        "target_date_range": "2026-11-09 to 2026-11-15",
+        "primary_surgeon": "Dr. Robert Vance"
+      }
+    },
+    {
+      "patient_id": "P1002",
+      "name": "Robert Smith",
+      "dob": "1975-11-20",
+      "phone": "+1-555-0245",
+      "ssn_masked": "***-**-8765",
+      "email": "r***h@example.com",
+      "emergency_contact": "Mary Smith (Spouse) - 555-0246",
+      "conditions": ["Coronary Artery Disease", "Hyperlipidemia"],
+      "scheduled_surgery": null
+    },
+    {
+      "patient_id": "P1003",
+      "name": "Emily Johnson",
+      "dob": "1992-03-08",
+      "phone": "+1-555-0378",
+      "ssn_masked": "***-**-1122",
+      "email": "e***n@example.com",
+      "emergency_contact": "David Johnson (Father) - 555-0379",
+      "conditions": ["Meniscus Tear", "Knee Pain"],
+      "scheduled_surgery": {
+        "procedure": "Total Knee Replacement",
+        "target_date_range": "2026-11-16 to 2026-11-22",
+        "primary_surgeon": "Dr. Robert Vance"
+      }
+    },
+    {
+      "patient_id": "P1004",
+      "name": "Alex Taylor",
+      "dob": "1988-09-12",
+      "phone": "+1-555-0456",
+      "ssn_masked": "***-**-9900",
+      "email": "a***r@example.com",
+      "emergency_contact": "Sarah Taylor (Sister) - 555-0457",
+      "conditions": ["Routine Annual Checkup"],
+      "scheduled_surgery": null
+    }
+  ]
+}

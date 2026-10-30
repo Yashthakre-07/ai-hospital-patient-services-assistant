@@ -1,0 +1,59 @@
+{
+  "lab_results": [
+    {
+      "lab_id": "LAB-8810",
+      "patient_id": "P1001",
+      "test": "HbA1c",
+      "value": "6.2",
+      "unit": "%",
+      "range": "< 5.7% (Normal), 5.7-6.4% (Prediabetes), >= 6.5% (Diabetes)",
+      "interpretation": "Controlled (Prediabetes range)",
+      "date": "2026-10-25",
+      "ordering_physician": "Dr. Sarah Jenkins"
+    },
+    {
+      "lab_id": "LAB-8811",
+      "patient_id": "P1001",
+      "test": "Fasting Blood Sugar",
+      "value": "108",
+      "unit": "mg/dL",
+      "range": "70-99 mg/dL (Normal), 100-125 mg/dL (Impaired)",
+      "interpretation": "Mildly elevated (Impaired fasting glucose)",
+      "date": "2026-10-25",
+      "ordering_physician": "Dr. Sarah Jenkins"
+    },
+    {
+      "lab_id": "LAB-8812",
+      "patient_id": "P1001",
+      "test": "Complete Blood Count (CBC)",
+      "value": "WBC 6.5, RBC 4.8, Hb 14.1, Plt 240",
+      "unit": "standard",
+      "range": "Normal",
+      "interpretation": "Within normal limits",
+      "date": "2026-10-25",
+      "ordering_physician": "Dr. Robert Vance"
+    },
+    {
+      "lab_id": "LAB-8813",
+      "patient_id": "P1001",
+      "test": "Comprehensive Metabolic Panel (CMP)",
+      "value": "eGFR > 90, Creatinine 0.9",
+      "unit": "standard",
+      "range": "Normal",
+      "interpretation": "Normal kidney/liver panel",
+      "date": "2026-10-25",
+      "ordering_physician": "Dr. Robert Vance"
+    },
+    {
+      "lab_id": "LAB-9010",
+      "patient_id": "P1002",
+      "test": "Lipid Panel",
+      "value": "Total Cholesterol 220, LDL 142, HDL 42",
+      "unit": "mg/dL",
+      "range": "Elevated LDL",
+      "interpretation": "Hyperlipidemia",
+      "date": "2026-10-20",
+      "ordering_physician": "Dr. Sarah Jenkins"
+    }
+  ]
+}

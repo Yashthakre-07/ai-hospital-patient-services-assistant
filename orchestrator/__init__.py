@@ -171,3 +171,4 @@ def process_message(message: str, confirm_token: Optional[str], user_ctx: Dict[s
         "tools_invoked": [],
         "explanation": "No authorized document or tool record matched the query."
     }
+
