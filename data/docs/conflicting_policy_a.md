@@ -12,3 +12,4 @@ Masking is optional in general hospital public corridors, cafeteria, and non-cli
 
 ## Section 2.0 - Clinical Areas
 Masking is strictly recommended in all high-risk clinical areas including Bone Marrow Transplant and Oncology wards.
+

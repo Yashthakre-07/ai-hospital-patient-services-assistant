@@ -12,3 +12,4 @@ This document outlines visiting regulations for Intensive Care Unit (ICU) beds a
 
 ## Section 2.0 - Visiting Hours and Visitor Limits
 Visiting hours for general ICU patients are strictly between 2:00 PM and 4:00 PM daily. Only one visitor is permitted at the bedside at any given time. Visitors under age 16 are not permitted.
+

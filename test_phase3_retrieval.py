@@ -117,3 +117,4 @@ def test_prompt_injection_neutralization():
     # The injection prompt must be neutralized to inert text marker
     assert "INERT_TEXT_MARKER" in top["text"]
     assert "SYSTEM OVERRIDE" not in top["text"]
+

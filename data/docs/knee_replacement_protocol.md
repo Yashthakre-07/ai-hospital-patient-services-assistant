@@ -20,3 +20,4 @@ All elective knee replacement candidates must complete the following pre-operati
 
 ## Section 3.0 - Pre-Operative Medication Adjustments
 Anticoagulants and NSAIDs must be discontinued prior to surgery in consultation with the prescribing physician: Aspirin held 7 days, Warfarin held 5 days with INR < 1.4 target.
+

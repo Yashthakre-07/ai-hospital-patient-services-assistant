@@ -15,3 +15,4 @@ General ICU visiting hours are from 10:00 AM to 1:00 PM and 4:00 PM to 8:00 PM d
 
 ## Section 3.0 - Hygiene and Safety Requirements
 All visitors must perform hand hygiene at the sanitizing station upon entering and exiting the ICU. Visitors exhibiting symptoms of respiratory illness or fever are prohibited from entering.
+

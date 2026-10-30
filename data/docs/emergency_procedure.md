@@ -12,3 +12,4 @@ The Emergency Department (ED) provides continuous 24/7 care for acute illnesses 
 
 ## Section 2.0 - Critical Warning Signs and Immediate Action
 If you or a patient experience severe chest pain, shortness of breath, sudden facial drooping or weakness, speech difficulties, or uncontrolled bleeding, do not wait for assistant or clinic responses. Call 911 immediately or proceed to the nearest Emergency Department.
+

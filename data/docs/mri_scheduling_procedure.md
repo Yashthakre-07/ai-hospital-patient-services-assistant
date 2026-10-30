@@ -15,3 +15,4 @@ Prior to scan confirmation, all patients must complete the Magnetic Resonance Sa
 
 ## Section 3.0 - Day of Scan Preparation
 Patients undergoing abdominal or pelvic MRI with contrast must fast for 4 hours prior to the scan. Arrive 30 minutes prior to scheduled scan time for registration and changing into hospital-approved MR-safe gowns.
+

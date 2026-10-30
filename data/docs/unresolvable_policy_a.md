@@ -9,3 +9,4 @@
 
 ## Section 1.0 - Unescorted Patient Ambulation
 Post-operative patients in Wing B may ambulate independently in hospital hallways 24 hours after surgery if their pain score is below 4.
+
