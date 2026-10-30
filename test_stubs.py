@@ -125,5 +125,5 @@ def test_chat_endpoint_surgery_readiness():
     data = resp.json()
     assert data["answer_type"] == "calculated"
     assert len(data["tools_invoked"]) == 4
-    assert "not medical authorization" in data["answer"]
+    assert "NOT constitute medical or surgical authorization" in data["answer"]
 

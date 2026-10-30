@@ -7,7 +7,9 @@ Endpoints:
 - GET /health: quick health check
 """
 from typing import Optional, List, Dict, Any
+import os
 from fastapi import FastAPI, Request, HTTPException, status
+from fastapi.responses import HTMLResponse, FileResponse
 from pydantic import BaseModel, Field
 
 import auth
@@ -20,6 +22,19 @@ app = FastAPI(
     version="1.0.0",
     description="Grounded, secure, auditable hospital assistant."
 )
+
+UI_HTML_PATH = os.path.join(os.path.dirname(__file__), "ui", "index.html")
+
+@app.get("/", response_class=HTMLResponse)
+def get_ui():
+    if os.path.exists(UI_HTML_PATH):
+        with open(UI_HTML_PATH, "r", encoding="utf-8") as f:
+            return f.read()
+    return "<h1>Hospital Assistant API Online</h1>"
+
+@app.get("/audit/recent")
+def get_recent_audits():
+    return audit.get_all_traces(limit=25)
 
 
 class ChatRequest(BaseModel):

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCLTech Hospital Patient Services Assistant</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .badge-retrieved_fact { background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+        .badge-calculated { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .badge-action_completed { background-color: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
+        .badge-clarification_needed { background-color: #fef9c3; color: #854d0e; border: 1px solid #fef08a; }
+        .badge-not_found { background-color: #f3f4f6; color: #374151; border: 1px solid #e5e7eb; }
+        .badge-refused { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .badge-conflict_flagged { background-color: #ffedd5; color: #9a3412; border: 1px solid #fed7aa; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen flex flex-col font-sans">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-indigo-700 text-white shadow-md px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-hospital text-2xl text-indigo-200"></i>
+            <div>
+                <h1 class="text-lg font-bold leading-tight">AI Hospital Patient Services Assistant</h1>
+                <p class="text-xs text-indigo-200">HCLTech Hackathon • Grounded • Auditable • Deterministic</p>
+            </div>
+        </div>
+
+        <!-- Identity / Persona Switcher -->
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2 bg-indigo-800 px-3 py-1.5 rounded-lg border border-indigo-600">
+                <i class="fa-solid fa-user-circle text-indigo-300"></i>
+                <label for="personaSelect" class="text-xs font-semibold uppercase tracking-wider text-indigo-200">Persona:</label>
+                <select id="personaSelect" onchange="switchPersona()" class="bg-indigo-900 text-white text-xs rounded px-2 py-1 outline-none border border-indigo-700 font-medium cursor-pointer">
+                    <option value="P1001" selected>P1001 (Jane Doe - Surgery Ready)</option>
+                    <option value="P1002">P1002 (Robert Smith - Privacy Target)</option>
+                    <option value="P1003">P1003 (Emily Johnson - Uncovered Knee)</option>
+                    <option value="admin">Admin (Hospital Operations)</option>
+                </select>
+            </div>
+            
+            <button onclick="toggleAuditModal()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3 py-1.5 rounded-lg border border-indigo-400 transition flex items-center space-x-1">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Audit Logs</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="flex-1 flex overflow-hidden">
+        
+        <!-- Left Sidebar: Quick Scenarios & Admin Panel -->
+        <aside class="w-80 bg-white border-r border-slate-200 flex flex-col p-4 space-y-4 overflow-y-auto">
+            <div>
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Hackathon Scenarios</h2>
+                <div class="space-y-1.5 text-xs">
+                    <button onclick="sendQuickPrompt('What are the visiting hours for ICU patients?')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-clock text-slate-400 mr-1.5"></i> 1. ICU Visiting Hours (Policy RAG)
+                    </button>
+                    <button onclick="sendQuickPrompt('How do I schedule an MRI scan?')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-procedures text-slate-400 mr-1.5"></i> 2. Schedule MRI (Procedure)
+                    </button>
+                    <button onclick="sendQuickPrompt('What are my upcoming appointments?')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-calendar-check text-slate-400 mr-1.5"></i> 3. My Appointments (Tool)
+                    </button>
+                    <button onclick="sendQuickPrompt('What is my latest blood sugar and HbA1c reading?')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-vial text-slate-400 mr-1.5"></i> 4. Latest Labs / HbA1c (Tool)
+                    </button>
+                    <button onclick="sendQuickPrompt('Am I covered for knee replacement under my insurance?')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-shield-halved text-slate-400 mr-1.5"></i> 5. Knee Eligibility (Insurance Tool)
+                    </button>
+                    <button onclick="sendQuickPrompt('Can I proceed with surgery next week?')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-clipboard-list text-slate-400 mr-1.5"></i> 6. Surgery Readiness (Workflow)
+                    </button>
+                    <button onclick="sendQuickPrompt('Reschedule my cardiology appointment.')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-arrows-rotate text-slate-400 mr-1.5"></i> 7. Reschedule (2-Phase Action)
+                    </button>
+                    <button onclick="sendQuickPrompt('Show me the lab results for patient P1002')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-red-50 hover:text-red-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-user-shield text-red-500 mr-1.5"></i> 8. Cross-Patient Privacy (Refused)
+                    </button>
+                    <button onclick="sendQuickPrompt('Can post-operative patients in Wing B ambulate independently?')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-700 border border-slate-200 transition">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-500 mr-1.5"></i> 9. Conflict Flagged (Ambulation)
+                    </button>
+                    <button onclick="sendQuickPrompt('What is the protocol for astronaut training in the ward?')" class="w-full text-left p-2 rounded bg-slate-50 hover:bg-slate-100 border border-slate-200 transition">
+                        <i class="fa-solid fa-circle-question text-slate-400 mr-1.5"></i> 10. Unsupported Condition (Not Found)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Live Ingestion Panel -->
+            <div id="adminPanel" class="pt-3 border-t border-slate-200">
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center">
+                    <i class="fa-solid fa-cloud-arrow-up mr-1.5 text-indigo-500"></i> Admin Live Ingestion (R11)
+                </h2>
+                <div class="space-y-2 text-xs">
+                    <p class="text-slate-500 text-[11px]">Upload clinical protocol without restart.</p>
+                    <input type="text" id="adminFilePath" placeholder="data/docs/sample.md" class="w-full text-xs p-1.5 border border-slate-300 rounded focus:border-indigo-500 outline-none" value="data/docs/emergency_procedure.md">
+                    <button onclick="uploadDocument()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-1.5 px-3 rounded text-xs transition">
+                        Live Ingest Protocol
+                    </button>
+                    <div id="ingestStatus" class="text-[11px] font-medium hidden"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center: Chat Stream -->
+        <main class="flex-1 flex flex-col bg-slate-100">
+            <!-- Messages Container -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Welcome greeting -->
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold shrink-0">AI</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 max-w-2xl text-sm leading-relaxed">
+                        <p class="font-semibold text-slate-800 mb-1">Hello! I am your Hospital Patient Services Assistant.</p>
+                        <p class="text-slate-600">I can help you review visiting policies, check appointment schedules, look up diagnostic lab results, verify insurance benefits, and coordinate surgical readiness checklists.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <div class="p-4 bg-white border-t border-slate-200">
+                <form id="chatForm" onsubmit="handleChatSubmit(event)" class="flex space-x-3 max-w-4xl mx-auto">
+                    <input type="text" id="chatInput" placeholder="Ask a hospital policy question, check appointments, or verify labs..." class="flex-1 border border-slate-300 rounded-lg px-4 py-2 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none">
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg text-sm transition flex items-center space-x-1.5">
+                        <span>Send</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Audit Trace Modal -->
+    <div id="auditModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl shadow-2xl max-w-3xl w-full h-3/4 flex flex-col overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-indigo-600"></i>
+                    <h3 class="font-bold text-slate-800">Compliance & Audit Trail Inspector (R10)</h3>
+                </div>
+                <button onclick="toggleAuditModal()" class="text-slate-400 hover:text-slate-600 text-lg">&times;</button>
+            </div>
+            <div id="auditLogsBody" class="flex-1 p-6 overflow-y-auto space-y-3 font-mono text-xs bg-slate-900 text-slate-200">
+                <!-- Dynamically loaded -->
+            </div>
+            <div class="px-6 py-3 border-t border-slate-200 flex justify-end bg-slate-50">
+                <button onclick="loadAuditLogs()" class="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded mr-2 hover:bg-indigo-500">Refresh</button>
+                <button onclick="toggleAuditModal()" class="text-xs bg-slate-300 text-slate-700 px-3 py-1.5 rounded hover:bg-slate-400">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUserId = "P1001";
+        let currentUserRole = "patient";
+        let pendingConfirmToken = null;
+
+        function switchPersona() {
+            const sel = document.getElementById("personaSelect").value;
+            currentUserId = sel;
+            currentUserRole = (sel === "admin") ? "admin" : "patient";
+            
+            const adminPanel = document.getElementById("adminPanel");
+            if (currentUserRole === "admin") {
+                adminPanel.classList.remove("opacity-50");
+            }
+        }
+
+        function sendQuickPrompt(promptText) {
+            document.getElementById("chatInput").value = promptText;
+            document.getElementById("chatForm").dispatchEvent(new Event('submit'));
+        }
+
+        async function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById("chatInput");
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Render User Bubble
+            renderUserMessage(message);
+            input.value = "";
+
+            try {
+                const payload = { message: message };
+                if (pendingConfirmToken && message.toLowerCase().includes("confirm")) {
+                    payload.confirm_token = pendingConfirmToken;
+                }
+
+                const response = await fetch("/chat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-User-Id": currentUserId,
+                        "X-User-Role": currentUserRole
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                renderAssistantMessage(data);
+
+                // Check if proposal token was returned
+                if (data.answer_type === "clarification_needed" && data.answer.includes("token: ")) {
+                    pendingConfirmToken = data.answer.split("token: ")[1].trim();
+                } else {
+                    pendingConfirmToken = null;
+                }
+            } catch (err) {
+                renderAssistantError("Network error contacting assistant server.");
+            }
+        }
+
+        function renderUserMessage(text) {
+            const container = document.getElementById("chatMessages");
+            const div = document.createElement("div");
+            div.className = "flex justify-end space-x-2";
+            div.innerHTML = `
+                <div class="bg-indigo-600 text-white px-4 py-2.5 rounded-xl shadow-sm text-sm max-w-xl">
+                    <p>${escapeHtml(text)}</p>
+                </div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function renderAssistantMessage(data) {
+            const container = document.getElementById("chatMessages");
+            const div = document.createElement("div");
+            div.className = "flex items-start space-x-3";
+
+            // Format Citations
+            let citationsHtml = "";
+            if (data.citations && data.citations.length > 0) {
+                const cItems = data.citations.map(c => `
+                    <span class="inline-flex items-center space-x-1 bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-[11px] border border-slate-300">
+                        <i class="fa-solid fa-bookmark text-slate-400"></i>
+                        <span>${escapeHtml(c.source)} (${escapeHtml(c.section)}) • v${escapeHtml(c.version || '1.0')}</span>
+                    </span>
+                `).join(" ");
+                citationsHtml = `<div class="mt-2.5 pt-2 border-t border-slate-100 flex flex-wrap gap-1 items-center">
+                    <span class="text-[11px] font-bold text-slate-400 mr-1">Citations:</span>
+                    ${cItems}
+                </div>`;
+            }
+
+            // Format Tools
+            let toolsHtml = "";
+            if (data.tools_invoked && data.tools_invoked.length > 0) {
+                const tItems = data.tools_invoked.map(t => `
+                    <span class="inline-flex items-center space-x-1 bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded text-[11px] border border-indigo-200">
+                        <i class="fa-solid fa-gear text-indigo-400"></i>
+                        <span>${escapeHtml(t.tool)}</span>
+                    </span>
+                `).join(" ");
+                toolsHtml = `<div class="mt-1 flex flex-wrap gap-1 items-center">
+                    <span class="text-[11px] font-bold text-slate-400 mr-1">Tools Invoked:</span>
+                    ${tItems}
+                </div>`;
+            }
+
+            div.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold shrink-0">AI</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 max-w-2xl text-sm leading-relaxed">
+                    <!-- Header with Badge and Trace -->
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full badge-${data.answer_type}">
+                            ${escapeHtml(data.answer_type)}
+                        </span>
+                        <span class="text-[11px] font-mono text-slate-400 flex items-center">
+                            <i class="fa-solid fa-fingerprint mr-1"></i> ${escapeHtml(data.trace_id)}
+                        </span>
+                    </div>
+
+                    <!-- Answer Body -->
+                    <div class="text-slate-800 whitespace-pre-wrap">${formatMarkdown(data.answer)}</div>
+
+                    ${toolsHtml}
+                    ${citationsHtml}
+                </div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function renderAssistantError(msg) {
+            const container = document.getElementById("chatMessages");
+            const div = document.createElement("div");
+            div.className = "flex items-start space-x-3";
+            div.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold shrink-0">!</div>
+                <div class="bg-red-50 p-3 rounded-xl border border-red-200 text-xs text-red-700 max-w-xl">
+                    ${escapeHtml(msg)}
+                </div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function uploadDocument() {
+            const path = document.getElementById("adminFilePath").value.trim();
+            const statusDiv = document.getElementById("ingestStatus");
+            statusDiv.classList.remove("hidden", "text-green-600", "text-red-600");
+            statusDiv.textContent = "Ingesting protocol...";
+
+            try {
+                const res = await fetch("/ingest", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-User-Id": currentUserId,
+                        "X-User-Role": currentUserRole
+                    },
+                    body: JSON.stringify({ file_path: path })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    statusDiv.textContent = `✓ Ingested ${data.file} (${data.chunks} chunks active)`;
+                    statusDiv.classList.add("text-green-600");
+                } else {
+                    statusDiv.textContent = `✗ ${data.detail || 'Ingestion failed'}`;
+                    statusDiv.classList.add("text-red-600");
+                }
+            } catch (e) {
+                statusDiv.textContent = "✗ Network error";
+                statusDiv.classList.add("text-red-600");
+            }
+        }
+
+        async function toggleAuditModal() {
+            const modal = document.getElementById("auditModal");
+            modal.classList.toggle("hidden");
+            if (!modal.classList.contains("hidden")) {
+                loadAuditLogs();
+            }
+        }
+
+        async function loadAuditLogs() {
+            const container = document.getElementById("auditLogsBody");
+            container.innerHTML = "Loading audit entries...";
+            try {
+                const res = await fetch("/audit/recent");
+                const entries = await res.json();
+                if (entries.length === 0) {
+                    container.innerHTML = "No audit entries recorded yet.";
+                    return;
+                }
+                container.innerHTML = entries.map(e => `
+                    <div class="p-2.5 rounded bg-slate-800 border border-slate-700">
+                        <div class="flex justify-between text-indigo-400">
+                            <span>[${escapeHtml(e.trace_id)}]</span>
+                            <span class="text-slate-400">${escapeHtml(e.iso_time)}</span>
+                        </div>
+                        <div class="text-slate-300 mt-1">${JSON.stringify(e.event, null, 2)}</div>
+                    </div>
+                `).join("");
+            } catch (err) {
+                container.innerHTML = "Error fetching audit logs.";
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function formatMarkdown(text) {
+            if (!text) return '';
+            // Basic formatting for bold and lists
+            let html = escapeHtml(text);
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            return html;
+        }
+    </script>
+</body>
+</html>
