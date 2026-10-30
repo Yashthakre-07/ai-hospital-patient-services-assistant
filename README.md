@@ -29,8 +29,15 @@ A grounded, secure, auditable, and deterministic AI assistant that answers patie
 - All dependencies are in `requirements.txt`
 
 ### Setup and Start in 1 Command
+
+#### Option A: Streamlit UI (Recommended for Live Hackathon Judging)
 ```bash
-pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+Opens interactive Streamlit dashboard at **`http://localhost:8501`**.
+
+#### Option B: FastAPI All-in-One Server & Web UI
+```bash
 python app.py
 ```
 Open **`http://localhost:8000`** in any browser.
@@ -91,3 +98,4 @@ The entire application runs **100% locally and deterministically**. It requires 
 | **Q2: How do you defend against prompt injection in hospital docs?** | *Requirement R8: All ingested documents pass through our chunking neutralizer. Directive patterns like `SYSTEM OVERRIDE` or `ignore previous instructions` are stripped into inert markers `[DATA ONLY: INERT_TEXT_MARKER]` before indexing.* |
 | **Q3: How do you handle contradictory hospital policies?** | *We apply an explicit medical guideline hierarchy: `regulatory_authority (Rank 3) > clinical_guideline (Rank 2) > hospital_policy (Rank 1)`, followed by effective date. If two policies at the same authority level directly conflict, the assistant refuses to hallucinate and issues a `conflict_flagged` response.* |
 | **Q4: How is patient identity protected?** | *Zero trust on prompt text. Identity is derived strictly from verified request headers (`X-User-Id`). When a patient attempts to query another ID (`P1002`), our authorization guard immediately halts execution and logs a privacy refusal.* |
+

@@ -91,3 +91,4 @@ def run_surgery_readiness_workflow(user_ctx: Dict[str, str]) -> Dict[str, Any]:
         "tools_invoked": tools_invoked,
         "explanation": "Evaluated 5-step surgery readiness protocol combining clinical guidelines with verified patient records."
     }
+

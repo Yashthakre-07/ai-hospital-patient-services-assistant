@@ -114,3 +114,4 @@ def test_eval_full_benchmark():
     print(f"\n[LATENCY REPORT] p50: {p50:.2f}ms | p95: {p95:.2f}ms")
     assert p50 < 100.0
     assert p95 < 250.0
+
